@@ -1,8 +1,4 @@
 {
-  "npmScope": "commerce",
-  "affected": {
-    "defaultBase": "master"
-  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
@@ -10,18 +6,28 @@
     },
     ".eslintrc.json": "*"
   },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "commerce",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "YThkNDFmM2QtOTFkMi00ZTg4LTk3MjQtYTRkMmU1OTY4NmNkfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "faculty-of-commerce": {
+      "tags": []
+    },
+    "faculty-of-commerce-e2e": {
+      "tags": [],
+      "implicitDependencies": ["faculty-of-commerce"]
+    }
+  }
 }

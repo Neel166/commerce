@@ -1,10 +1,132 @@
 {
-  
-  
   "version": 2,
-  
-  "projects": {},
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/react",
+    "packageManager": "yarn"
+  },
+  "defaultProject": "faculty-of-commerce",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-jsx",
+        "linter": "eslint",
+        "strict": true,
+        "babel": true
+      },
+      "component": {
+        "style": "styled-jsx"
+      },
+      "library": {
+        "style": "styled-jsx",
+        "linter": "eslint",
+        "strict": true
+      }
+    }
+  },
+  "projects": {
+    "faculty-of-commerce": {
+      "root": "apps/faculty-of-commerce",
+      "sourceRoot": "apps/faculty-of-commerce/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/faculty-of-commerce",
+            "index": "apps/faculty-of-commerce/src/index.html",
+            "main": "apps/faculty-of-commerce/src/main.tsx",
+            "polyfills": "apps/faculty-of-commerce/src/polyfills.ts",
+            "tsConfig": "apps/faculty-of-commerce/tsconfig.app.json",
+            "assets": [
+              "apps/faculty-of-commerce/src/favicon.ico",
+              "apps/faculty-of-commerce/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/faculty-of-commerce/src/environments/environment.ts",
+                  "with": "apps/faculty-of-commerce/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "faculty-of-commerce:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "faculty-of-commerce:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/faculty-of-commerce/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/faculty-of-commerce"],
+          "options": {
+            "jestConfig": "apps/faculty-of-commerce/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "faculty-of-commerce-e2e": {
+      "root": "apps/faculty-of-commerce-e2e",
+      "sourceRoot": "apps/faculty-of-commerce-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/faculty-of-commerce-e2e/cypress.json",
+            "tsConfig": "apps/faculty-of-commerce-e2e/tsconfig.e2e.json",
+            "devServerTarget": "faculty-of-commerce:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "faculty-of-commerce:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/faculty-of-commerce-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
   }
 }
